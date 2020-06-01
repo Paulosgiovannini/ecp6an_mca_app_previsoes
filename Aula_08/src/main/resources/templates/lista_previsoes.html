@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Hello Spring Boot</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
+</head>
+<body>
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">previsão do tempo</h1>
+		</div>
+		<div class="panel-body">
+			<form class="form-inline" method="post" th:object="${previsao}" th:action="@{/previsoes}" style="margin:20px 0"> 
+					<div class="form-group">
+				<input type="text" class="form-control" placeholder="Nome do dia da semana" th:field="*{nome}"/>
+					<input type="text" class="form-control" placeholder="temperatura mínima (graus)" th:field="*{tempMin}"/> 
+					<input type="text" class="form-control" placeholder="temperatura máxima (graus)" th:field="*{tempMax}"/> 
+					<input type="text" class="form-control" placeholder="umidade relativa do ar (%)" th:field="*{umidade}"/> 
+					<input type="text" class="form-control" placeholder="campo textual para uma descrição sucinta." th:field="*{descricao}"/> 
+								
+					<button type="submit" class="btn btn-primary">Adicionar</button> </div>
+				</form>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome do dia da semana</th>
+						<th>temperatura mínima (graus)</th>
+						<th>temperatura máxima (graus)</th>
+						<th>umidade relativa do ar (%)</th>
+						<th>descrição</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="previsao:${previsoes}">
+						<td th:text="${previsao.nome}"></td>
+						<td th:text="${previsao.tempMin}"></td>
+						<td th:text="${previsao.tempMax}"></td>
+						<td th:text="${previsao.umidade}"></td>
+						<td th:text="${previsao.descricao}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
